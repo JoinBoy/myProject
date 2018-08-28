@@ -34,7 +34,6 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
-
 	<servlet>
 		<servlet-name>springMvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -52,5 +51,8 @@
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
-
+	<servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
  </web-app>
