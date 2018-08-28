@@ -19,5 +19,8 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     <!-- 访问静态资源 -->
     <mvc:annotation-driven/>
 	<mvc:default-servlet-handler />
+	<!-- 在web.xml中设置了，这里不用了 -->
+<!-- 	<mvc:resources  location="/js/" mapping="/js/**"/>  
+    <mvc:resources  location="/css/" mapping="/css/**"/>   -->
 
 </beans>
