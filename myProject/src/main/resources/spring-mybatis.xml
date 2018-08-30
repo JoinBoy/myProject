@@ -55,7 +55,7 @@
 		<property name="mapperLocations" value="classpath:com/ccj/*/mapper/*.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ccj.*.dao" />
+		<property name="basePackage" value="com.ccj.*.*.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 </beans>
