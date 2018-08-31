@@ -7,7 +7,9 @@ $(document).ready(function(){
 //	初始化左侧图片
 	initImg();
 //  监听鼠标滚轮
-windowAddMouseWheel();
+	windowAddMouseWheel();
+//点击首页右侧跳转子项目首页
+	childProject();
 })
 //	点击变换图片
 function imgClick(){
@@ -93,4 +95,12 @@ function onMouseDown(){
 	setTimeout(function(){
 		$(".main-right img").attr("src",url).show("fast")
 	},200)
+}
+
+//点击首页右侧跳转子项目首页
+function childProject(){
+	$(".main-right").click(function(){
+		console.log(1111)
+		window.location.href="vueIndex";
+	})
 }

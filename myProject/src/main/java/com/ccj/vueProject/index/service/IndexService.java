@@ -1,7 +1,9 @@
 package com.ccj.vueProject.index.service;
 
+import java.util.List;
+
 import com.ccj.vueProject.index.bean.IndexBean;
 
 public interface IndexService {
-	IndexBean getindex(String userId);
+	List<IndexBean> getIndex(String userId);
 }

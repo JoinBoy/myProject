@@ -1,9 +1,11 @@
-package com.ccj.vueProjec.index.dao;
+package com.ccj.vueProject.index.dao;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.ccj.vueProject.index.bean.IndexBean;
 @Repository
 public interface IndexMapper {
-	IndexBean getindex(String userId);
+	List<IndexBean> getIndex(String userId);
 }

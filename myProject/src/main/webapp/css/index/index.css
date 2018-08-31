@@ -3,7 +3,7 @@
 	margin: 0;
 }
 body{
-	overflow: hidden;
+	overflow: auto;
 }
 .main{
 	width:1200px;
@@ -12,7 +12,7 @@ body{
 	
 }
 .main-left{
-	width:400px;
+	width:300px;
 	height:100%;
 	float: left;
 	overflow: hidden;
@@ -20,7 +20,7 @@ body{
 .main-right{
 	width:800px;
 	height:100%;
-	float:left;
+	float:right;
 	animation: moveRight 2s ease alternate;
 	background-color:rgba(255,255,255,0.4);
 	position:relative;
@@ -28,7 +28,7 @@ body{
 .list{
 	height:100%;
 	width:200px;
-	margin:0 100px;
+	margin-right:100px;
 	animation:moveLeft 2s ease alternate;
 	background-color:rgba(255,255,255,0.4);
 }

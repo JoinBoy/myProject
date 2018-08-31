@@ -1,5 +1,26 @@
 jQuery(function($){
-
+	var imageList = [];
+	$.ajax({
+		url:"/myProject/indexList",
+		method:"POST",
+		async:false,
+		data:{},
+		success:function(res){
+			if(res.data.code == 1){
+				var list = res.data.imageUrl;
+				for(var i=0;i<list.length;i++){
+					var imageObject = new Object;
+					imageObject["image"] = list[i].bannerUrl;
+					imageList.push(imageObject);
+				}
+			}else{
+				imageList = [{image : 'images/index/indexBackground/1.jpg'},
+                             {image : 'images/index/indexBackground/2.jpg'},
+                             {image : 'images/index/indexBackground/3.jpg'},
+                             {image : 'images/index/indexBackground/4.jpg'}]
+			}
+		}
+	})
     $.supersized({
 
         // Functionality
@@ -19,12 +40,7 @@ jQuery(function($){
 
         // Components
         slide_links        : 'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
-        slides             : [    // Slideshow Images
-                                 {image : 'images/index/indexBackground/1.jpg'},
-                                 {image : 'images/index/indexBackground/2.jpg'},
-                                 {image : 'images/index/indexBackground/3.jpg'},
-                                 {image : 'images/index/indexBackground/4.jpg'}
-                       		]
+        slides             : imageList
 
     });
 
