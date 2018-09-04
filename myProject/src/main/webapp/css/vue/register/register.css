@@ -1,0 +1,15 @@
+*{
+	margin:0;
+	padding:0;
+}
+.main{
+	height:100%;
+	width:1200px;
+	background-color:red;
+	margin:auto;
+}
+.registerTable{
+	height:800px;
+	width:800px;
+	backgroud-color:rgba(255,255,255,.4);
+}
