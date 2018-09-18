@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import com.ccj.vueProject.index.bean.IndexBean;
 @Repository
 public interface IndexMapper {
-	List<IndexBean> getIndex(String userId);
+	public List<IndexBean> getIndex(String userId);
 }

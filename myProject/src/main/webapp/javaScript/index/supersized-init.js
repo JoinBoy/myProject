@@ -19,6 +19,12 @@ jQuery(function($){
                              {image : 'images/index/indexBackground/3.jpg'},
                              {image : 'images/index/indexBackground/4.jpg'}]
 			}
+		},
+		error:function(){
+			imageList = [{image : 'images/index/indexBackground/1.jpg'},
+                         {image : 'images/index/indexBackground/2.jpg'},
+                         {image : 'images/index/indexBackground/3.jpg'},
+                         {image : 'images/index/indexBackground/4.jpg'}]
 		}
 	})
     $.supersized({
