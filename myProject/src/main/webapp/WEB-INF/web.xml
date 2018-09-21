@@ -88,7 +88,8 @@
 	    <url-pattern>/js/**</url-pattern>    
 	    <url-pattern>/css/**</url-pattern>    
 	    <url-pattern>/icon/**</url-pattern>    
-	    <url-pattern>/image/**</url-pattern>    
+	    <url-pattern>/images/**</url-pattern>
+	    <url-pattern>/bootstrap/**</url-pattern>    
 	</servlet-mapping>
 	<!--配置日志文件  -->
 	<context-param>  

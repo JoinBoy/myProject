@@ -12,7 +12,8 @@ public class VueRegister {
 	
 	@RequestMapping(value="/register", produces="application/json;charset=utf-8",method={RequestMethod.GET})
 	public String Register(){
-		return "vue/register";
+		log.info("访问登录注册页面");
+		return "vue/register/register";
 	}
 
 }

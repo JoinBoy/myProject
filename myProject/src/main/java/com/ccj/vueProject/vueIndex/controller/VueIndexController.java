@@ -11,6 +11,6 @@ public class VueIndexController {
 	@RequestMapping(value="/vueIndex",produces = "application/json;charset=utf-8",method = {RequestMethod.GET})
 	public String indexPage(){
 		log.info("访问VUE项目主页");		
-		return "vue/vueIndex";
+		return "vue/vueIndex/vueIndex";
 	}
 }

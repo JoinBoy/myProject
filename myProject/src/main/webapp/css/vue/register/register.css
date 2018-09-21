@@ -1,15 +1,74 @@
 *{
 	margin:0;
 	padding:0;
+	font-family: "微软雅黑";
+}
+html{
+	height:100%;
+	}
+body{
+	height:100%;
+	background-image: url(../../../images/index/indexBackground/login.jpg);
+	background-repeat:no-repeat;
+	background-size: 100%;
 }
 .main{
 	height:100%;
 	width:1200px;
-	background-color:red;
 	margin:auto;
+	position: relative;
 }
 .registerTable{
-	height:800px;
-	width:800px;
-	backgroud-color:rgba(255,255,255,.4);
+	height:400px;
+	width:300px;
+	background-color:rgba(255,255,255,1);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right:0;
+	bottom:0;
+	margin: auto;
+}
+.title{
+	height:50px;
+	width:100%;
+	border-bottom: 2px solid #ECECEC;
+}
+.login{
+	width:50%;
+	float:left;
+	height:50px;
+}
+.login-text{
+	width:60px;
+	height:50px;
+	margin:0 auto;
+	font-size: 22px;
+	color:#333;
+	line-height: 50px;
+	text-align: center;
+}
+.formDiv{
+	height:50px;
+	width:80%;
+	margin:0 auto;
+	line-height: 50px;	
+}
+.formDiv-input{
+	height:40px;
+	width: 80%;
+	margin-top:5px;
+	border:1px solid ##ECECEC;
+}
+.myBotton{
+	font-size: 17px;
+	width:120px;
+	margin-left: 60px;
+}
+.loginContent{
+	margin-top: 20px;
+}
+.warnning{
+	color:#fa2150;
+	padding:0 10px;
 }
