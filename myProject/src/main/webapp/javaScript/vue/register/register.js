@@ -3,6 +3,7 @@ $("document").ready(function(){
 	getClientHeight();
 	//监听窗口变化
 	windowResize();
+	//生成验证码
 	creatCode([2,"中",7,4])
 });
 
@@ -68,21 +69,101 @@ function randomX(x){
 	x = parseInt(Math.random()*x);
 	return x;
 }
-var app = new Vue({
+
+var app= new Vue({
 	el:"#app",
 	data:{
 		login:true,
 		register:false,
+		nameRegister:"",
+		passWordRegister:"",
+		passWordRegisterAffirm:"",
+		mailRegister:"",
+		messageRegister:"",
 	},
 	methods:{
-		showLogin:function(){
-			app.$data.login=true;
+		showLogin:function(){//点击登录标签
+			app.$data.login=true;				
+			this.$nextTick(function(){
+				creatCode([2,"中",7,4]);
+			})
 			app.$data.register=false;
-			console.log("22")
 		},
-		showRegister:function(){
+		showRegister:function(){//点击注册标签
 			app.$data.login=false;
 			app.$data.register=true;
+		},
+		submit:function(){
+			
+		},
+		detection:function(){//注册监测逻辑
+			//判断账号
+			if(app.$data.nameRegister){
+				if(app.$data.nameRegister.length>6) {
+					app.$data.messageRegister = "账号长度不能大于6!";
+					return 0;
+				}else{
+					app.$data.messageRegister = "";
+				}
+			}
+			//判断密码
+			if(app.$data.passWordRegister){
+				if(app.$data.passWordRegister.length<8 || app.$data.passWordRegister.length>16){
+					app.$data.messageRegister = "密码长度位8-16位!";
+					return 0;
+				}else if(app.$data.passWordRegisterAffirm.length>0){
+					if(app.$data.passWordRegisterAffirm !== app.$data.passWordRegister){
+						app.$data.messageRegister = "两次密码不一样!";
+						return 0 ;
+					}
+				}else {
+					app.$data.messageRegister = "";
+				}
+			}			
+			//判断再次输入密码
+			if(app.$data.passWordRegisterAffirm){
+				if(app.$data.passWordRegister){
+					if(app.$data.passWordRegister !== app.$data.passWordRegisterAffirm){
+						app.$data.messageRegister = "两次密码不一样!";
+						return 0 ;
+					}else{
+						app.$data.messageRegister = "";
+					}
+				}else{
+					app.$data.messageRegister = "请输入上边密码";
+					return 0 ;
+				}
+			}			
+			//判断邮箱
+			if(app.$data.mailRegister){
+				var re = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+				if(re.test(app.$data.mailRegister)){
+					app.$data.messageRegister = "";
+				}
+				else{
+					app.$data.messageRegister = "请输入正确的邮箱格式!";
+					return 0;
+				}	
+			}
+		}
+	},
+	watch:{
+		nameRegister:function(){//账号判断
+			app.$data.nameRegister = $.trim(app.$data.nameRegister);
+			this.detection();
+		},
+		passWordRegister:function(){//密码判断
+			app.$data.passWordRegister = $.trim(app.$data.passWordRegister);
+			this.detection();
+		},
+		passWordRegisterAffirm:function(){//再次输入密码判断
+			app.$data.passWordRegisterAffirm = $.trim(app.$data.passWordRegisterAffirm);
+			this.detection();
+		},
+		mailRegister:function(){//邮箱判断
+			app.$data.mailRegister = $.trim(app.$data.mailRegister);
+			this.detection();
 		}
 	}
+
 })

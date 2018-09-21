@@ -1,7 +1,10 @@
 *{
 	margin:0;
 	padding:0;
-	font-family: "å¾®è½¯é›…é»‘";
+	font-family: "Î¢ÈíÑÅºÚ";
+}
+[v-cloak] {
+    display: none !important;
 }
 html{
 	height:100%;
@@ -11,10 +14,12 @@ body{
 	background-image: url(../../../images/index/indexBackground/login.jpg);
 	background-repeat:no-repeat;
 	background-size: 100%;
+	min-height:400px;
+	min-width:300px;
 }
 .main{
 	height:100%;
-	width:1200px;
+	min-width:300px;
 	margin:auto;
 	position: relative;
 }
@@ -38,6 +43,7 @@ body{
 	width:50%;
 	float:left;
 	height:50px;
+	cursor: pointer;
 }
 .login-text{
 	width:60px;
@@ -71,4 +77,14 @@ body{
 .warnning{
 	color:#fa2150;
 	padding:0 10px;
+}
+.line{
+	height:2px;
+	width:60px;
+	margin:-2px auto;
+	background-color: #479E47;
+}
+.giveNew{
+	margin-left:20px;
+	cursor: pointer;
 }
