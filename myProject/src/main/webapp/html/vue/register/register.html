@@ -48,7 +48,7 @@
 						<input style="margin-left:3px" type="text" name="verification" id="verification"  class="formDiv-input"/>
 					</div>
 					<div class="formDiv">
-						<button class="btn btn-success myBotton">登录</button>
+						<button class="btn btn-success myBotton" @click='onLogin'>登录</button>
 					</div>
 				</div>
 				<div  class="loginContent" v-cloak v-if="register" style="margin-top: 0px;">
@@ -83,6 +83,7 @@
 	</body>
 	<script src="javaScript/jquery/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="javaScript/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javaScript/vue/resource.js" type="text/javascript" charset="utf-8"></script>
 	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="javaScript/vue/register/register.js" type="text/javascript" charset="utf-8"></script>	
 </html>

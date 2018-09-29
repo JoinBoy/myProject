@@ -93,8 +93,17 @@ var app= new Vue({
 			app.$data.login=false;
 			app.$data.register=true;
 		},
-		submit:function(){
-			
+		submit:function(){//点击注册按钮
+			this.$http.post("/myProject/registerList",
+					{userName:this.$data.nameRegister,
+					userPassWord:this.$data.passWordRegister,
+					userMail:this.$data.mailRegister}).then((response)=>{
+				if(response.body.code ==1){
+					this.$data.messageRegister = response.body.message;
+				}
+			},(response)=>{
+				console.log(response)
+			})
 		},
 		detection:function(){//注册监测逻辑
 			//判断账号
@@ -145,7 +154,10 @@ var app= new Vue({
 					return 0;
 				}	
 			}
-		}
+		},
+		onLogin:function(){
+			
+		},
 	},
 	watch:{
 		nameRegister:function(){//账号判断
