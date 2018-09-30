@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ccj.vueProject.user.bean.UserBean;
 import com.ccj.vueProject.user.dao.UserMapper;
 import com.ccj.vueProject.user.service.UserService;
+import com.ccj.vueProject.verificationCode.bean.VerificationCode;
 @Service
 public class UserServiceImpl implements UserService{
 	@Autowired
@@ -22,6 +23,12 @@ public class UserServiceImpl implements UserService{
 	public int addUser(UserBean userBean) {
 		// TODO Auto-generated method stub
 		int result = userMapper.addUser(userBean);
+		return result;
+	}
+	@Override
+	public int addCode(VerificationCode verificationCode) {
+		// TODO Auto-generated method stub
+		int result = userMapper.addCode(verificationCode);
 		return result;
 	}
 

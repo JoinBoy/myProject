@@ -26,29 +26,29 @@
 				</div>
 				<div class="loginContent"  v-if="login">
 					<div class="formDiv">
-						<div class="warnning">
-							<span class="glyphicon glyphicon-warning-sign"></span>
-							<span>用户名或密码错误！</span>
+						<div class="warnning" v-cloak>
+							<span class="glyphicon glyphicon-warning-sign" v-if="loginMessage"></span>
+							<span>{{loginMessage}}</span>
 						</div>
 					</div>
 					<div class="formDiv">
 						<span>账号：</span>
-						<input type="text" name="name" id="name"  class="formDiv-input"/>
+						<input type="text" name="name" id="name" v-model.trim='userName'  class="formDiv-input"/>
 					</div>
 					<div class="formDiv">
 						<span>密码：</span>
-						<input type="password" name="password" id="password"  class="formDiv-input"/>
+						<input type="password" name="password" v-model.trim="userPassWord" id="password"  class="formDiv-input"/>
 					</div>
 					<div class="formDiv">
 						<canvas id="canvas" width="100px" height="40px" style="float:left; margin-top: 5px;margin-left: 46px;"></canvas>
-						<a class="giveNew">换一张</a>
+						<a class="giveNew" @click="getCode">换一张</a>
 					</div>
 					<div class="formDiv">
 						<span style="float:left;margin-left: -13px;">验证码：</span>
-						<input style="margin-left:3px" type="text" name="verification" id="verification"  class="formDiv-input"/>
+						<input style="margin-left:3px" type="text" name="verification" id="verification" v-model.trim="verification"  class="formDiv-input"/>
 					</div>
 					<div class="formDiv">
-						<button class="btn btn-success myBotton" @click='onLogin'>登录</button>
+						<button class="btn btn-success myBotton" @click='onLogin' :disabled="userName.length==0||userPassWord.length==0||verification.length==0">登录</button>
 					</div>
 				</div>
 				<div  class="loginContent" v-cloak v-if="register" style="margin-top: 0px;">

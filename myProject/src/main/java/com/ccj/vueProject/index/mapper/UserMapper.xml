@@ -7,6 +7,7 @@
 		<result column="CREATETIME" property='createTime' jdbcType="VARCHAR"/>
 		<result column="PASSWORD" property='userPassWord' jdbcType="VARCHAR"/>
 	</resultMap>
+	<!--查找用户名是否存在  -->
 	<select id="findUser" resultMap="getUserName" parameterType="java.lang.String">
 		SELECT 
     		us.USERNAME,
@@ -18,6 +19,7 @@
    		WHERE
    			us.USERNAME = #{userName:VARCHAR}
 	</select>
+	<!-- 注册 -->
 	<insert id="addUser" keyProperty="USERID" parameterType="com.ccj.vueProject.user.bean.UserBean">
 		INSERT INTO user
 			(USERNAME,
@@ -28,5 +30,23 @@
 		#{userMail:VARCHAR},
 		#{userPassWord:VARCHAR},
 		#{createTime:VARCHAR});
+	</insert>
+	<!-- 插入验证码 -->
+	<insert id="addCode" keyProperty="CODEID" parameterType="com.ccj.vueProject.verificationCode.bean.VerificationCode">
+		INSERT INTO verificationCode(
+			CODE,
+			CREATETIME,
+			SESSIONID,
+			FLAGE,
+			USERIP
+		)
+		VALUES(
+			#{code:VARCHAR},
+			#{createTime:VARCHAR},
+			#{sessionId:VARCHAR},
+			#{flage:VARCHAR},
+			#{userIp:VARCHAR}
+		);
+	
 	</insert>
 </mapper>

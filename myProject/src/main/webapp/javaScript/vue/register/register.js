@@ -4,7 +4,6 @@ $("document").ready(function(){
 	//监听窗口变化
 	windowResize();
 	//生成验证码
-	creatCode([2,"中",7,4])
 });
 
 //获取浏览器视口高度
@@ -75,17 +74,24 @@ var app= new Vue({
 	data:{
 		login:true,
 		register:false,
+		userName:"",
+		userPassWord:"",
 		nameRegister:"",
 		passWordRegister:"",
 		passWordRegisterAffirm:"",
 		mailRegister:"",
 		messageRegister:"",
+		loginMessage:"",
+		verification:"",
+	},
+	mounted:function(){
+		this.getCode();//调用生成验证码
 	},
 	methods:{
 		showLogin:function(){//点击登录标签
 			app.$data.login=true;				
 			this.$nextTick(function(){
-				creatCode([2,"中",7,4]);
+				this.getCode();
 			})
 			app.$data.register=false;
 		},
@@ -155,9 +161,26 @@ var app= new Vue({
 				}	
 			}
 		},
-		onLogin:function(){
-			
+		onLogin:function(){//用户点击登录
+			this.$http.post("/myProject/login",{userName:this.$data.userName,
+			userPassWord:this.$data.userPassWord,
+			verification:this.$data.verification}).then((respone)=>{
+				
+			},(response)=>{
+				
+			})
 		},
+		getCode:function(){//获取验证码
+			this.$http.get("/myProject/verificationCode").then((response)=>{
+				if(response.body.code==0){
+					creatCode(response.body.data);//调用生成验证码
+				}else{
+					
+				}
+			},(response)=>{
+				
+			})
+		}
 	},
 	watch:{
 		nameRegister:function(){//账号判断
