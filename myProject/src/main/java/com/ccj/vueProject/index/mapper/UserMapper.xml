@@ -49,4 +49,28 @@
 		);
 	
 	</insert>
+	<!-- 查询验证码 -->
+	<select id="findCode" resultType="com.ccj.vueProject.verificationCode.bean.VerificationCode" parameterType="java.lang.String">
+		SELECT
+			*
+		FROM
+			verificationcode
+		WHERE
+			CODE = #{0}
+		AND
+		<![CDATA[
+			TIMESTAMPDIFF(MINUTE ,verificationcode.CREATETIME,NOW()) < #{1}
+			]]>
+	</select>
+	<!-- 用户登录 -->
+	<select id="findUserLog" resultType="com.ccj.vueProject.user.bean.UserBean" parameterType="java.lang.String">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			USERNAME = #{0}
+		AND
+			PASSWORD = #{1:VARCHAR}
+	</select>
 </mapper>

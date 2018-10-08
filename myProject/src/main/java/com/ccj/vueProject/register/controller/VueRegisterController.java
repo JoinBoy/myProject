@@ -1,5 +1,6 @@
 package com.ccj.vueProject.register.controller;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -98,13 +100,34 @@ public class VueRegisterController {
 	}
 	/**
 	 * 用户登录逻辑
+	 * @throws IOException 
 	 * */
 	@RequestMapping(value="login",produces="application/json;charset=utf-8",method={RequestMethod.POST})
 	@ResponseBody
-	public String login(@RequestBody String body){
+	public String login(HttpServletRequest request,HttpServletResponse response,  @RequestParam(required = false) String userName,@RequestParam(required = false) String userPassWord,@RequestParam(required = false) String verification) throws IOException{
 		log.info("用户登录");
-		System.out.println(body);
-
-		return "";
+//		设置验证码有效期为n分钟
+		String interval = "5";
+		JSONObject json = new JSONObject();
+		VerificationCode verificationCode = userService.findCode(verification,interval);
+		if(verificationCode != null){
+			UserBean userBean = userService.findUserLog(userName, userPassWord);
+			if(userBean !=null){
+				json.put("code", 0);
+				json.put("message", "登陆成功！");
+				log.info("用户登录成功！,用户名="+userName);
+				return json.toJSONString();
+			}else{
+				json.put("code", 1);
+				json.put("message", "用户名或密码错误！");
+				log.info("用户名或密码错误！,用户名="+userName);
+				return json.toJSONString();
+			}
+		}else{
+			json.put("code", 1);
+			json.put("message", "验证码错误！");
+			log.info("验证码错误！,用户名="+userName);
+			return json.toJSONString();
+		}			
 	}
 }

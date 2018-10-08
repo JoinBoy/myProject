@@ -15,9 +15,26 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
         <property name="suffix" value=".html"></property>
         <property name="contentType" value="text/html"/>
     </bean>
-     
-    <!-- 访问静态资源 -->
+    <!-- application/json请求配置 -->
+   	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+ 
+	<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+    
+    <!-- 开启注解 -->
     <mvc:annotation-driven/>
+    <!-- 访问静态资源 -->
 	<mvc:default-servlet-handler />
 	<!-- 在web.xml中设置了，这里不用了 -->
 <!-- 	<mvc:resources  location="/js/" mapping="/js/**"/>  

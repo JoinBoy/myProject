@@ -9,4 +9,6 @@ public interface UserService {
 	public List<UserBean> findUser(String userName);
 	public int addUser(UserBean userBean);
 	public int addCode(VerificationCode verificationCode);
+	public VerificationCode findCode(String verification,String interval);
+	public UserBean findUserLog(String userName,String userPassWord);
 }

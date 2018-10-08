@@ -164,10 +164,15 @@ var app= new Vue({
 		onLogin:function(){//用户点击登录
 			this.$http.post("/myProject/login",{userName:this.$data.userName,
 			userPassWord:this.$data.userPassWord,
-			verification:this.$data.verification}).then((respone)=>{
-				
+			verification:this.$data.verification},{emulateJSON:true}).then((response)=>{
+				if(response.body.code==0){
+					this.$data.loginMessage = '';
+					window.location.href="/myProject/vueIndex";
+				}else if(response.body.code==1){
+					this.$data.loginMessage = response.body.message;
+				}
 			},(response)=>{
-				
+				this.$data.loginMessage = "请求失败！";
 			})
 		},
 		getCode:function(){//获取验证码

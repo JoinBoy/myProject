@@ -31,5 +31,15 @@ public class UserServiceImpl implements UserService{
 		int result = userMapper.addCode(verificationCode);
 		return result;
 	}
+	@Override
+	public VerificationCode findCode(String verification,String interval) {
+		VerificationCode verificationCode = userMapper.findCode(verification,interval);
+		return verificationCode;
+	}
+	@Override
+	public UserBean findUserLog(String userName, String userPassWord) {
+		UserBean userBean = userMapper.findUserLog(userName, userPassWord);
+		return userBean;
+	}
 
 }
