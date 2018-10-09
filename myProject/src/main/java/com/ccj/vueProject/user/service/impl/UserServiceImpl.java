@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService{
 		UserBean userBean = userMapper.findUserLog(userName, userPassWord);
 		return userBean;
 	}
+	@Override
+	public int addToken(String token, String tokenCteatTime, String userName) {
+		int result = userMapper.addToken(token, tokenCteatTime, userName);
+		return result;
+	}
 
 }

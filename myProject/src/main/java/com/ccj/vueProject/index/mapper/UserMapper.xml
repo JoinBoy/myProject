@@ -69,8 +69,13 @@
 		FROM
 			user
 		WHERE
-			USERNAME = #{0}
+			USERNAME = #{0:VARCHAR}
 		AND
 			PASSWORD = #{1:VARCHAR}
 	</select>
+	<!-- 存储token -->
+	<update id="addToken" parameterType="java.lang.String" >
+		UPDATE user SET TOKEN = #{0:VARCHAR},TOKENCREATTIME = #{1:VARCHAR} WHERE USERNAME = #{2:VARCHAR}
+	
+	</update>
 </mapper>

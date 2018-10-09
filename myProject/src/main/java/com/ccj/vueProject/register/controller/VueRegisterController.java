@@ -1,11 +1,15 @@
 package com.ccj.vueProject.register.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,17 +110,40 @@ public class VueRegisterController {
 	@ResponseBody
 	public String login(HttpServletRequest request,HttpServletResponse response,  @RequestParam(required = false) String userName,@RequestParam(required = false) String userPassWord,@RequestParam(required = false) String verification) throws IOException{
 		log.info("用户登录");
-//		设置验证码有效期为n分钟
+		/*设置验证码有效期为n分钟*/
 		String interval = "5";
 		JSONObject json = new JSONObject();
 		VerificationCode verificationCode = userService.findCode(verification,interval);
 		if(verificationCode != null){
 			UserBean userBean = userService.findUserLog(userName, userPassWord);
 			if(userBean !=null){
-				json.put("code", 0);
-				json.put("message", "登陆成功！");
-				log.info("用户登录成功！,用户名="+userName);
-				return json.toJSONString();
+				HttpSession session = request.getSession();
+				session.setAttribute("userName",userName);
+				String sessionId = session.getId();
+				/*获得当前时间*/
+				Date date = new Date(System.currentTimeMillis());
+				/*格式化时间*/
+				SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				int result = userService.addToken(sessionId, sdf2.format(date), userName);
+				if(result>0){
+					Cookie token = new Cookie("token",sessionId);
+					Cookie cookie = new Cookie("userName",URLEncoder.encode(userName,"utf-8"));
+					/*设置cookie为7天*/
+					token.setMaxAge(7*24*60*60);
+					cookie.setMaxAge(3600*24*7);
+					response.addCookie(cookie);
+					response.addCookie(token);				
+					json.put("code", 0);
+					json.put("message", "登陆成功！");
+					log.info("用户登录成功！,用户名="+userName);
+					return json.toJSONString();
+				}else{
+					json.put("code", 1);
+					json.put("message", "登录失败！");
+					log.info("登录失败！,用户名="+userName);
+					return json.toJSONString();
+				}
+				
 			}else{
 				json.put("code", 1);
 				json.put("message", "用户名或密码错误！");
