@@ -7,10 +7,127 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css"/>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/vue/vueIndex/vueIndex.css"/>
 	</head>
 	<body>
-	
+		<div id="app">
+			<nav class="navbar navbar-static-top navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle= "collapse" data-target=".navbar-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">VUE MUSIC</a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">音乐馆</a></li>
+						<li><a href="#">我的音乐</a></li>
+					</ul>
+					<div class="nav navbar-nav navbar-text navbar-right"><a href="#">联系我们</a></div>
+					<div class="btn btn-default navbar-btn navbar-right"><a href="#">登录</a></div>
+					<form action="" class="navbar-form navbar-right" role='search'>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="搜索歌曲名、歌手名" />
+						</div>
+					</form>
+				</div>
+			</nav>
+			<div class="container">
+				<!--支持歌手-->
+				<!-- <div class="panel panel-default">
+					<div class="nav panel-heading text-center">目前支持歌手
+						<button href="#" class="navbar-right btn btn-sm">展开</button>	
+					</div>
+					<div class="panel-body">
+						<ul class="list-unstyled text-center">
+							<li class="col-lg-1">sdfsdf</li>
+						</ul>
+					</div>
+				</div> -->
+				<!--推荐-->
+				<div class="panel panel-default	">
+					<div class="panel-heading text-center">推荐</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<td class="text-danger text-center col-lg-2">序号</td>
+									<td class="text-danger text-center col-lg-2">歌曲名</td>
+									<td class="text-danger text-center col-lg-2">歌手名</td>
+									<td class="text-danger text-center col-lg-2">播放</td>
+									<td class="text-danger text-center col-lg-2">喜欢</td>
+									<td class="text-danger text-center col-lg-2">添加收藏</td>
+								</tr>
+							</thead>						
+							<tbody v-cloak>
+								<tr v-for="(item,index) in list.recommend" :key="index">
+									<td class="text-center col-lg-2">{{index+1}}</td>
+									<td class="text-center col-lg-2">{{item.musicName}}</td>
+									<td class="text-center col-lg-2">{{item.songerName}}</td>
+									<td class="text-center col-lg-2 cursor">播放</td>
+									<td class="text-center col-lg-2 cursor">喜欢</td>
+									<td class="text-center col-lg-2 cursor">添加收藏</td>
+								</tr>
+							</tbody>	
+						</table>
+					</div>
+				</div>
+				<!--播放最多-->
+				<div class="panel panel-default	">
+					<div class="panel-heading text-center">播放最多</div>
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<td class="text-danger text-center col-lg-2">序号</td>
+									<td class="text-danger text-center col-lg-2">歌曲名</td>
+									<td class="text-danger text-center col-lg-2">歌手名</td>
+									<td class="text-danger text-center col-lg-2">播放</td>
+									<td class="text-danger text-center col-lg-2">喜欢</td>
+									<td class="text-danger text-center col-lg-2">添加收藏</td>
+								</tr>
+							</thead>						
+							<tbody v-cloak>
+								<tr v-for="(item,index) in list.playList" :key="index">
+									<td class="text-center col-lg-2">{{index+1}}</td>
+									<td class="text-center col-lg-2">{{item.musicName}}</td>
+									<td class="text-center col-lg-2">{{item.songerName}}</td>
+									<td class="text-center col-lg-2 cursor">播放</td>
+									<td class="text-center col-lg-2 cursor">喜欢</td>
+									<td class="text-center col-lg-2 cursor">添加收藏</td>
+								</tr>
+							</tbody>							
+						</table>
+					</div>
+				</div>
+				<div ></div>
+			</div>
+			<div class="modal-footer footer text-center">
+				<div class="container">
+					<div class="col-lg-12 text-center">
+						公司手机:15802295478 15802296514
+					</div>
+					<div class="col-lg-12 text-center">
+						公司传真:022-54125412
+					</div>
+					<div class="col-lg-12 text-center">
+						公司座机:022-57486854 022-84513854
+					</div>
+					<div class="col-lg-12 text-center">
+						公司地址:中华人民共和国、天津市、南开区、胜利大街10000000号。
+					</div>
+				</div>
+				
+			</div>
+		</div>		
 	</body>
+	<script src="javaScript/jquery/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javaScript/vue/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javaScript/vue/resource.js" type="text/javascript" charset="utf-8"></script>
+	<script src="javaScript/vue/vueIndex/vueIndex.js" type="text/javascript" charset="utf-8"></script>
 </html>

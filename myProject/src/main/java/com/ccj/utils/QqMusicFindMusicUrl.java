@@ -36,6 +36,7 @@ public class QqMusicFindMusicUrl {
 				}
 				responseReader.close();
 				String result = sb.toString();
+				System.out.println(result);
 				int index = result.indexOf("(");
 				result = result.substring(index+1);
 				result = result.replace(")", "");
@@ -68,6 +69,9 @@ public class QqMusicFindMusicUrl {
 			return "失败";
 		}
 		return "失败";
+	}
+	public void main(String[] args){
+		findMusicUrl("11");
 	}
 	
 }
