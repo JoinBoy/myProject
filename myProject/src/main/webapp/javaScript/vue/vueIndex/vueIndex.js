@@ -2,7 +2,10 @@
 var app = new Vue({
 	el:"#app",
 	data:{
-		list:{} //初始化数据
+		list:{}, //初始化数据
+		musicUrl:"",
+		musicName:"",
+		songerName:"",
 	},
 	methods:{
 		getList:function(){
@@ -19,6 +22,11 @@ var app = new Vue({
 					}
 			
 			)
+		},
+		play:function(e){
+			this.$data.musicUrl = e.currentTarget.getAttribute("data-musicUrl");
+			this.$data.musicName = e.currentTarget.getAttribute("data-musicName");
+			this.$data.songerName = e.currentTarget.getAttribute("data-songerName");
 		}
 	},
 	mounted:function(){

@@ -22,9 +22,9 @@ public class YymusicController {
 		for(int i=0;i<readList.length;i++){
 			YyMp3 yyMp3 = new YyMp3();
 			System.out.println(22);
-			List<MusicBean> list = yyMp3.findYyMp3(readList[i],2);
+			List<MusicBean> list = yyMp3.findYyMp3(readList[i],3);
 			for(int j=0;j<list.size();j++){
-				System.out.println("1111"+list.get(j).getMusicName());
+				System.out.println(j+"=="+list.get(j).getMusicName());
 				int w = musicService.addMusic(list.get(j));
 			}
 		}

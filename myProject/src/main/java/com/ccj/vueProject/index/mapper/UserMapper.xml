@@ -75,7 +75,12 @@
 	</select>
 	<!-- 存储token -->
 	<update id="addToken" parameterType="java.lang.String" >
-		UPDATE user SET TOKEN = #{0:VARCHAR},TOKENCREATTIME = #{1:VARCHAR} WHERE USERNAME = #{2:VARCHAR}
+		UPDATE user SET TOKEN = #{0:VARCHAR},TOKENCREATTIME = #{1:VARCHAR},IP = #{3:VARCHAR} WHERE USERNAME = #{2:VARCHAR}
 	
 	</update>
+	<!-- 查看用户是否在登录有效期内 -->
+	<select id='findUserLogAgain' parameterType='java.lang.String' resultType= 'java.lang.String'>
+		SELECT userName FROM user WHERE userName = #{0:VARCHAR} AND IP = #{1:VARCHAR}
+	</select>
+	
 </mapper>

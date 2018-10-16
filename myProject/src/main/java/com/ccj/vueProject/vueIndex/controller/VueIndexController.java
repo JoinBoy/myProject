@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ccj.utils.VerifyRegister;
 import com.ccj.vueProject.music.bean.MusicBean;
 import com.ccj.vueProject.vueIndex.service.VueIndexService;
 
@@ -23,8 +24,8 @@ public class VueIndexController {
 	VueIndexService vueIndexService;
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	@RequestMapping(value="/vueIndex",produces = "application/json;charset=utf-8",method = {RequestMethod.GET})
-	public String indexPage(){
-		log.info("访问VUE项目主页");		
+	public String indexPage(HttpServletRequest request, HttpServletResponse response){
+		log.info("访问VUE项目主页");
 		return "vue/vueIndex/vueIndex";
 	};
 	
@@ -37,11 +38,14 @@ public class VueIndexController {
 		try{
 			List<MusicBean> recommend = vueIndexService.getRecommend(recommendSize);
 			List<MusicBean> playList = vueIndexService.getPlay(playSize);
+			VerifyRegister verifyRegister = new VerifyRegister();
+			String userName = verifyRegister.verifyRegister(request);
 			json.put("code", 0);
 			json.put("message", "success");
 			JSONObject list = new JSONObject();
 			list.put("recommend", recommend);
 			list.put("playList",playList);
+			list.put("userName", userName);
 			json.put("list", list);
 			return json.toJSONString();
 		}catch(Exception e){

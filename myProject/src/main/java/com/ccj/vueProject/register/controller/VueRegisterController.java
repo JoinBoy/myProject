@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ccj.utils.GetIpAddr;
 import com.ccj.vueProject.user.bean.UserBean;
 import com.ccj.vueProject.user.service.UserService;
 import com.ccj.vueProject.verificationCode.bean.VerificationCode;
@@ -36,6 +37,8 @@ public class VueRegisterController {
 	UserService userService;
 	@RequestMapping(value="/register", produces="application/json;charset=utf-8",method={RequestMethod.GET})
 	public String Register(HttpServletRequest request , HttpServletResponse response){
+		HttpSession session = request.getSession();
+		session.setAttribute("lastUrl", request.getHeader("Referer"));
 		log.info("访问登录注册页面");
 		return "vue/register/register";
 	}
@@ -124,18 +127,23 @@ public class VueRegisterController {
 				Date date = new Date(System.currentTimeMillis());
 				/*格式化时间*/
 				SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				int result = userService.addToken(sessionId, sdf2.format(date), userName);
+				String Ip = new GetIpAddr().getIpAddr(request);
+				int result = userService.addToken(sessionId, sdf2.format(date), userName ,Ip);
 				if(result>0){
-					Cookie token = new Cookie("token",sessionId);
+					String lastUrl = (String) session.getAttribute("lastUrl");
+					session.removeAttribute("lastUrl");
+					session.setAttribute("IP", Ip);
 					Cookie cookie = new Cookie("userName",URLEncoder.encode(userName,"utf-8"));
+					Cookie IpCookie = new Cookie("IP",Ip);
 					/*设置cookie为7天*/
-					token.setMaxAge(7*24*60*60);
+					IpCookie.setMaxAge(3600*24*7);
 					cookie.setMaxAge(3600*24*7);
 					response.addCookie(cookie);
-					response.addCookie(token);				
+					response.addCookie(IpCookie);
 					json.put("code", 0);
 					json.put("message", "登陆成功！");
 					log.info("用户登录成功！,用户名="+userName);
+					json.put("lastUrl", lastUrl);
 					return json.toJSONString();
 				}else{
 					json.put("code", 1);

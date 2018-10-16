@@ -11,5 +11,6 @@ public interface UserMapper {
 	public int addCode(VerificationCode verificationCode);
 	public VerificationCode findCode(String verification,String interval);
 	public UserBean findUserLog(String userName,String userPassWord);
-	public int addToken(String token,String tokenCteatTime, String userName);
+	public int addToken(String token, String tokenCteatTime, String userName, String ip);
+	public String findUserLogAgain(String userName, String Ip);
 }

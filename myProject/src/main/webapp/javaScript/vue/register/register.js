@@ -167,7 +167,7 @@ var app= new Vue({
 			verification:this.$data.verification},{emulateJSON:true}).then((response)=>{
 				if(response.body.code==0){
 					this.$data.loginMessage = '';
-					window.location.href="/myProject/vueIndex";
+					window.location.href=response.body.lastUrl;
 				}else if(response.body.code==1){
 					this.$data.loginMessage = response.body.message;
 				}
