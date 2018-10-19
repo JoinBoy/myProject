@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-10-16 08:38:43
+Date: 2018-10-19 17:32:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -19954,7 +19954,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', '喵了个咪', '2018-09-29 15:59:00.824', '364229070@qq.com', '11111111', '1F261215879F483A5911B76F989A2042', '2018-10-15 16:42:46', '0:0:0:0:0:0:0:1');
+INSERT INTO `user` VALUES ('2', '喵了个咪', '2018-09-29 15:59:00.824', '364229070@qq.com', '11111111', '8553CA08A7A9CF337BD4123371C944C0', '2018-10-19 16:15:32', '0:0:0:0:0:0:0:1');
 INSERT INTO `user` VALUES ('3', 'niu', '2018-10-15 17:22:18.834', '18822326624@163.com', '123456789', '314EE99BC0425A359457C9656424F378', '2018-10-15 17:22:45', '192.168.1.155');
 INSERT INTO `user` VALUES ('4', 'ysss', '2018-10-15 17:24:40.127', '515047102@qq.com', '11111111', null, null, null);
 INSERT INTO `user` VALUES ('5', 'ysss22', '2018-10-15 17:24:52.991', '515047102@qq.com', '11111111', null, null, null);
@@ -19972,7 +19972,7 @@ CREATE TABLE `verificationcode` (
   `USERIP` varchar(255) NOT NULL,
   `USERNAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CODEID`)
-) ENGINE=InnoDB AUTO_INCREMENT=657 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=669 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of verificationcode
@@ -20292,3 +20292,32 @@ INSERT INTO `verificationcode` VALUES ('653', '8140', '2018-10-15 17:29:43.647',
 INSERT INTO `verificationcode` VALUES ('654', '7717', '2018-10-15 17:29:48.474', '6A37B6B94B05D7367C6E6B4B9EF6563C', '1', '127.0.0.1', null);
 INSERT INTO `verificationcode` VALUES ('655', '0793', '2018-10-15 17:29:49.872', '6A37B6B94B05D7367C6E6B4B9EF6563C', '1', '127.0.0.1', null);
 INSERT INTO `verificationcode` VALUES ('656', '2943', '2018-10-15 17:29:51.162', '6A37B6B94B05D7367C6E6B4B9EF6563C', '1', '127.0.0.1', null);
+INSERT INTO `verificationcode` VALUES ('657', '3231', '2018-10-16 09:17:30.035', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('658', '6077', '2018-10-16 09:17:35.886', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('659', '8175', '2018-10-16 09:17:38.18', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('660', '8898', '2018-10-16 09:17:43.103', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('661', '5632', '2018-10-16 09:17:46.643', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('662', '6525', '2018-10-16 09:17:49.298', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('663', '6774', '2018-10-16 09:20:02.39', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('664', '0777', '2018-10-16 09:20:07.771', '8A6A427B59A8484FF30D29505ACD2F91', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('665', '0269', '2018-10-18 17:47:45.379', '064F7364D7C1B5480B7D4C38A7B00364', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('666', '2253', '2018-10-19 16:11:38.193', '8553CA08A7A9CF337BD4123371C944C0', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('667', '5955', '2018-10-19 16:15:14.967', '8553CA08A7A9CF337BD4123371C944C0', '1', '0:0:0:0:0:0:0:1', null);
+INSERT INTO `verificationcode` VALUES ('668', '7498', '2018-10-19 16:15:18.685', '8553CA08A7A9CF337BD4123371C944C0', '1', '0:0:0:0:0:0:0:1', null);
+
+-- ----------------------------
+-- Table structure for vuelove
+-- ----------------------------
+DROP TABLE IF EXISTS `vuelove`;
+CREATE TABLE `vuelove` (
+  `id` bigint(20) NOT NULL,
+  `musicName` varchar(255) NOT NULL,
+  `userName` varchar(255) NOT NULL,
+  `createTime` varchar(255) DEFAULT NULL,
+  `updateTime` varchar(255) DEFAULT NULL,
+  `flag` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of vuelove
+-- ----------------------------

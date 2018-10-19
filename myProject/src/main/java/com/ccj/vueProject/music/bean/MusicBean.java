@@ -22,5 +22,8 @@ public class MusicBean {
 	private Date createTime;
 	//更新时间
 	private Date updateTime;
+	//条id
+	private int songerId;
+	
 
 }

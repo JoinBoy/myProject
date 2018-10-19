@@ -76,7 +76,10 @@
 									<td class="text-center col-lg-2">{{item.musicName}}</td>
 									<td class="text-center col-lg-2">{{item.songerName}}</td>
 									<td class="text-center col-lg-2 "><span class="cursor" @click='play($event)' :data-musicUrl="item.musicUrl" :data-musicName="item.musicName" :data-songerName="item.songerName">播放<span></td>
-									<td class="text-center col-lg-2 cursor">喜欢</td>
+									<td class="text-center col-lg-2 ">
+										<img @click="addLove($event)" v-if="item.love == 1"   data-type="recommend" :data-songerId = "item.songerId" class='loveImg cursor' src='images/vue/vueIndex/loved.png'/>
+										<img @click="addLove($event)" v-else data-type="recommend" :data-songerId = "item.songerId" class='loveImg cursor' src='images/vue/vueIndex/unlove.png'/>										
+									</td>
 									<td class="text-center col-lg-2 cursor">添加收藏</td>
 								</tr>
 							</tbody>	
@@ -104,7 +107,10 @@
 									<td class="text-center col-lg-2">{{item.musicName}}</td>
 									<td class="text-center col-lg-2">{{item.songerName}}</td>
 									<td class="text-center col-lg-2 cursor"><span class="cursor" @click='play($event)' :data-musicUrl="item.musicUrl" :data-musicName="item.musicName" :data-songerName="item.songerName">播放<span></td>
-									<td class="text-center col-lg-2 cursor">喜欢</td>
+									<td class="text-center col-lg-2 ">
+										<img @click="addLove($event)" v-if="item.love == 1" data-type="playList"  :data-songerId = "item.songerId" class='loveImg cursor' src='images/vue/vueIndex/loved.png'/>
+										<img @click="addLove($event)" v-else data-type="playList"  :data-songerId = "item.songerId" class='loveImg cursor' src='images/vue/vueIndex/unlove.png'/>
+									</td>
 									<td class="text-center col-lg-2 cursor">添加收藏</td>
 								</tr>
 							</tbody>							

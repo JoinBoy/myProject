@@ -27,6 +27,7 @@
 					music
 			)
 		LIMIT #{0}
+		
 	</select>
 	<!-- 获取播放最多 -->
 	<select id="getPlay" resultType="com.ccj.vueProject.music.bean.MusicBean" >

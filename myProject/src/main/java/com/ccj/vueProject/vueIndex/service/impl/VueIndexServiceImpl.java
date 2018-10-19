@@ -17,11 +17,9 @@ public class VueIndexServiceImpl implements VueIndexService {
 		List<MusicBean> recommend = vueIndexMapper.getRecommend(recommendSize);
 		return recommend;
 	}
-
 	@Override
 	public List<MusicBean> getPlay(int playSize) {
 		List<MusicBean> playList= vueIndexMapper.getRecommend(playSize);
 		return playList;
 	}
-
 }
