@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//rg//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccj.vueProject.vueLove.dao.VueLoveMapper"> 
+	<!-- 点击喜欢图片 -->
+	<insert id="addVueLove" parameterType="com.ccj.vueProject.vueLove.bean.VueLoveBean" keyProperty="loveId">
+		INSERT INTO 
+		vuelove(
+			id,
+			userName,
+			createTime,
+			updateTime,
+			flag) 
+		VALUES (
+			#{id:VARCHAR},
+			#{userName:VARCHAR},
+			#{createTime:VARCHAR},
+			#{updateTime:VARCHAR},
+			#{flag:VARCHAR}
+			);
+		
+	</insert>
+	<update id="removeLove" parameterType="com.ccj.vueProject.vueLove.bean.VueLoveBean">
+		UPDATE vuelove SET updateTime = #{updateTime:VARCHAR},flag =  #{flag} where id = #{id}
+	</update>
+	<select id="findLove" resultType="int">
+		SELECT id FROM vuelove WHERE userName = #{0} and flag = 0;
+	</select>
+</mapper>

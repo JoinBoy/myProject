@@ -24,6 +24,8 @@ public class MusicBean {
 	private Date updateTime;
 	//条id
 	private int songerId;
+	//喜欢
+	private int love;
 	
 
 }

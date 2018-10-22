@@ -165,4 +165,39 @@ public class VueRegisterController {
 			return json.toJSONString();
 		}			
 	}
+	/**
+	 * 用户注销逻辑
+	 * */
+	@RequestMapping(value="/logout", produces="application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public String logout(HttpServletRequest request,HttpServletResponse response){
+		JSONObject json = new JSONObject();
+		try{
+			Cookie[] cookies = request.getCookies();
+			if( cookies != null){
+				for(Cookie cookie : cookies){
+					if(cookie.getName().equals("userName")){
+						System.out.println(cookie.getName());
+						cookie.setMaxAge(0);
+						cookie.setValue(null);
+						response.addCookie(cookie);
+					}
+					if(cookie.getName().equals("IP")){
+						cookie.setMaxAge(0);
+						cookie.setValue(null);
+						response.addCookie(cookie);
+					}
+				}
+			}
+			HttpSession session = request.getSession();
+			session.removeAttribute("IP");
+			json.put("code", 0);
+			json.put("message","success");
+			return json.toJSONString();
+		}catch(Exception e ){
+			json.put("code", 1);
+			json.put("message","failed");
+			return json.toJSONString();
+		}
+	}
 }

@@ -35,23 +35,62 @@ var app = new Vue({
 			if(this.$data.userName){
 				var songerId = $(e.currentTarget).data("songerid");
 				var type = e.currentTarget.getAttribute("data-type");
+				var flag = e.currentTarget.getAttribute("data-flag");
 				var childList = this.$data.list[type];
 				var index = childList.findIndex((value,index,childList)=>{
 					return value.songerId == songerId;
 				})
 				var list = this.$data.list
-				if(list[type][index].love == 1){
-					list[type][index].love = 0;
-				}else{
-					list[type][index].love = 1;
-				}				
-				this.$data.list = list;
-/*				app.$set(this.$data,"list",list);*/
-				/*强制刷新，vue中v-for渲染改变数据 v-if不重新渲染页面的情况*/
-                this.$forceUpdate()
+				if(flag == 1){
+					this.$http.post("/myProject/vueLove/addLove",
+							{id:songerId},{emulateJSON:true}).then((response)=>{
+						if(response.body.code ==0){							
+							list[type][index].love = 0;			
+							this.$data.list = list;
+							/*app.$set(this.$data,"list",list);*/
+							/*强制刷新，vue中v-for渲染改变数据 v-if不重新渲染页面的情况*/
+			                this.$forceUpdate()
+						}else{
+							alert("失败重新点击");
+						}
+					},(response)=>{
+						alert("失败重新点击");
+					});	
+				}else if(flag == 0){
+					this.$http.post("/myProject/vueLove/removeLove",
+							{id:songerId},{emulateJSON:true}).then((response)=>{
+						if(response.body.code ==0){
+							list[type][index].love = 1;
+							this.$data.list = list;
+							/*app.$set(this.$data,"list",list);*/
+							/*强制刷新，vue中v-for渲染改变数据 v-if不重新渲染页面的情况*/
+			                this.$forceUpdate()
+						}else{
+							alert("失败重新点击");
+						}
+					},(response)=>{
+						alert("失败重新点击");
+					});	
+					
+					
+				}
+				
+				
 			}else{
 				window.location.href="/myProject/register";
 			}
+		},
+		/*点击注销*/
+		logout:function(){
+			this.$http.post("/myProject/logout").then((response)=>{
+				if(response.body.code == 0){
+					window.location.reload();
+				}else{
+					alert("注销失败！");
+				}
+			},(response)=>{
+				alert("注销失败！");
+			})
 		}
 	},
 	mounted:function(){

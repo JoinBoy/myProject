@@ -4,17 +4,24 @@ package com.ccj.utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.ccj.vueProject.user.dao.UserMapper;
-
+@Component
 public class VerifyRegister {
 	@Autowired
 	UserMapper usermapper;
+	public static VerifyRegister verifyRegister;
+	@PostConstruct
+    public void init() {
+		verifyRegister = this;
+    }
 	@SuppressWarnings("unused")
 	public String verifyRegister(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -49,8 +56,7 @@ public class VerifyRegister {
 			}else{
 				/*session中不存在IP就用用户名和cookie中的ip去判断用户是否正确
 				 * 如果正确添加session并返回用户名，不正确返回空字符串（跳转登录）*/
-				String username = usermapper.findUserLogAgain(userName, cookieValue);
-				System.out.println(userName);
+				String username = verifyRegister.usermapper.findUserLogAgain(userName, cookieValue);
 				if(userName!=null){
 					return userName;
 				}else{
