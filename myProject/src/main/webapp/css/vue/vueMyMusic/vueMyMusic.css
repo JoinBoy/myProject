@@ -1,0 +1,42 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+[v-cloak] {
+    display: none !important;
+}
+body{
+	background-color:#F5F5F5;
+	height:100%;
+	width:100%;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+	border: none;
+}
+.cursor{
+	cursor: pointer;
+}
+.footer{
+	background-color:#666;
+	color:#fff;
+}
+.playAudio{
+	position: fixed;
+	height:160px;
+	width:100%;
+	background-color:rgba(51,51,51,.8);
+	bottom:0;
+	color:#fff;
+	
+}
+.playAudio>video{
+    margin: 0 auto;
+    padding: 0;
+    height: 60px;
+    width: 350px;
+}
+.loveImg{
+	height: 40px;
+    width: 40px;
+    margin-top: -8px;
+}

@@ -24,6 +24,10 @@ public class VueLoveController {
 	@Autowired
 	VueLoveMapper vueLoveMapper;
 	private Logger log = Logger.getLogger(this.getClass().getName());
+	/**
+	 * 点击喜欢添加
+	 * 
+	 * */
 	@RequestMapping(value="/vueLove/addLove",produces="application/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String addLove(HttpServletRequest request,HttpServletResponse response,VueLoveBean vueLoveBean ){
@@ -34,7 +38,7 @@ public class VueLoveController {
 		Date time = new Date(System.currentTimeMillis());
 		vueLoveBean.setCreateTime(time);
 		vueLoveBean.setUpdateTime(time);
-		vueLoveBean.setFlag(0);
+		vueLoveBean.setFlag(1);
 		JSONObject json = new JSONObject();
 		if(!userName.isEmpty()){
 			try{
@@ -64,12 +68,16 @@ public class VueLoveController {
 			return json.toJSONString();
 		}
 	}
+	/**
+	 * 点击喜欢取消
+	 * 
+	 * */
 	@RequestMapping(value="/vueLove/removeLove", produces="aplication/json;charset=utf-8",method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public String removeLove(HttpServletRequest request,HttpServletResponse response, @RequestParam (required = true) int id){
 		VueLoveBean vueLoveBean = new VueLoveBean();
 		vueLoveBean.setId(id);
-		vueLoveBean.setFlag(1);
+		vueLoveBean.setFlag(0);
 		Date time = new Date(System.currentTimeMillis());
 		vueLoveBean.setUpdateTime(time);
 		JSONObject json = new JSONObject();

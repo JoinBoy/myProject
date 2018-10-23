@@ -10,11 +10,16 @@ var app = new Vue({
 	},
 	methods:{
 		getList:function(){
-			this.$http.post("/myProject/getVueIndexList",{recommendSize:10,playSize:10},{emulateJSON:true}).then(
+			this.$http.post("/myProject/vueMyMusic/getList",{page:1},{emulateJSON:true}).then(
 					function(response){
 						if(response.body.code == 0){
-							this.$data.list = response.body.list;
-							this.$data.userName = response.body.list.userName;
+							if(response.body.list.userName){
+								this.$data.list = response.body.list;
+								this.$data.userName = response.body.list.userName;
+							}else{
+								window.location.href="/myProject/register";
+							}
+							
 						}else{
 							alert("请求失败");
 						}

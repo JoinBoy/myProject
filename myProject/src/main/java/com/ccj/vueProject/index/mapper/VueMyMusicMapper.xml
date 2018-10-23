@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//rg//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = 'com.ccj.vueProject.vueMyMusic.dao.VueMyMusicMapper'>
+	<select id="findMyLove" resultType="com.ccj.vueProject.music.bean.MusicBean">
+		SELECT
+			*
+		FROM
+			music mc
+		RIGHT JOIN (
+			SELECT
+				*
+			FROM
+				vuelove
+			WHERE
+				userName = #{0}
+		) ms ON ms.id = mc.songerId
+		LIMIT #{1},#{2}
+	</select>
+
+
+</mapper>

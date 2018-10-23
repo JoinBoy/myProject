@@ -1,9 +1,8 @@
-package com.ccj.vueProject.vueIndex.controller;
+package com.ccj.vueProject.vueMyMusic.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,39 +17,38 @@ import com.ccj.utils.VerifyRegister;
 import com.ccj.vueProject.music.bean.MusicBean;
 import com.ccj.vueProject.vueIndex.service.VueIndexService;
 import com.ccj.vueProject.vueLove.service.VueLoveService;
+import com.ccj.vueProject.vueMyMusic.service.VueMyMusicService;
 
 @Controller
-public class VueIndexController {
+public class VueMyMusicController {
+	@Autowired
+	VueMyMusicService vueMyMusicService;
 	@Autowired
 	VueIndexService vueIndexService;
 	@Autowired
 	VueLoveService vueLoveService;
 	private Logger log = Logger.getLogger(this.getClass().getName());
-	@RequestMapping(value="/vueIndex",produces = "application/json;charset=utf-8",method = {RequestMethod.GET})
-	public String indexPage(HttpServletRequest request, HttpServletResponse response){
-		log.info("访问VUE项目主页");
-		return "vue/vueIndex/vueIndex";
-	};
+	@RequestMapping(value="/vueMyMusic")
+	public String vueMyMusic(){
+		log.info("访问我的音乐页面");
+		return "vue/vueMyMusic/vueMyMusic";
+	}
 	
-	/*获取初始化数据*/
-	@RequestMapping(value="/getVueIndexList",produces = "application/json;charset=utf-8",method ={RequestMethod.POST})
+	@RequestMapping(value="/vueMyMusic/getList", produces="application/json;charset=utf-8",method = {RequestMethod.POST,RequestMethod.GET} )
 	@ResponseBody
-	public String getVueIndexList(HttpServletRequest request,HttpServletResponse response,@RequestParam(required = true) int recommendSize,@RequestParam(required = true) int playSize){
-		log.info("获得VueIndex页面初始化数据");
+	public String getList(@RequestParam(required = true) int page,HttpServletRequest request){
+		log.info("获得VueMyMusic页面初始化数据");
 		JSONObject json = new JSONObject();
+		final int LONGS = 10; //每页显示10条
+		int star = (page-1)*10;
 		try{
 			VerifyRegister verifyRegister = new VerifyRegister();
 			String userName = verifyRegister.verifyRegister(request);
-			List<MusicBean> recommend = vueIndexService.getRecommend(recommendSize);
-			List<MusicBean> playList = vueIndexService.getPlay(playSize);
+			List<MusicBean> loved = vueMyMusicService.findMyLove(userName, star, LONGS);
+			List<MusicBean> playList = vueIndexService.getPlay(10);
 			if(!userName.isEmpty()){
 				List<Integer> ids = vueLoveService.findLove(userName);
 				for(Integer id : ids){
-					for(MusicBean bean :recommend){
-						if(bean.getSongerId() == id){
-							bean.setLove(1);
-						}
-					}
 					for(MusicBean bean: playList){
 						if(bean.getSongerId() == id){
 							bean.setLove(1);
@@ -60,7 +58,7 @@ public class VueIndexController {
 				json.put("code", 0);
 				json.put("message", "success");
 				JSONObject list = new JSONObject();
-				list.put("recommend", recommend);
+				list.put("loved", loved);
 				list.put("playList",playList);
 				list.put("userName", userName);
 				json.put("list", list);
@@ -69,7 +67,7 @@ public class VueIndexController {
 				json.put("code", 0);
 				json.put("message", "success");
 				JSONObject list = new JSONObject();
-				list.put("recommend", recommend);
+				list.put("loved", loved);
 				list.put("playList",playList);
 				list.put("userName", userName);
 				json.put("list", list);
@@ -80,6 +78,7 @@ public class VueIndexController {
 			json.put("code", 1);
 			json.put("message", "fail");
 			return json.toJSONString();
-		}		
+		}
 	}
+	
 }
