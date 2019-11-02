@@ -1,5 +1,6 @@
 <template>
     <div class="navigation">
+            <img src="data:image/gif;base64,R0lGODlhAwADAIABAL6+vv///yH5BAEAAAEALAAAAAADAAMAAAIDjA9WADs=" />
         <el-row :gutter="2" justify="center"  type="flex">
             <el-col :span="4">
                 <a href="#guo">
@@ -43,6 +44,9 @@
 </script>
 
 <style lang="scss" scoped>
+    a{
+        text-decoration:none;
+    }
     .navigation{
         height:60px;
         margin:20px auto;

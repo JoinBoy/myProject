@@ -10,7 +10,7 @@
             
             <div class="header-right">
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="1">国内文学</el-menu-item>
+                    <el-menu-item index="333">国内文学</el-menu-item>
                     <el-menu-item index="2">英文文章</el-menu-item>
                 </el-menu>
             </div>
@@ -30,9 +30,9 @@
         //输入框的值
         private input3:string = "";
         //导航栏选择触发方法
-        // handleSelect(key, keyPath) {
-        //     console.log(key, keyPath);
-        // }
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        }
         //导航栏搜索
         search()  {
             

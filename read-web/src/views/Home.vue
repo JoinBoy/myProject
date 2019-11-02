@@ -8,6 +8,7 @@
     <CardVer/>
     <div class="indexMidTitle" id="wang">网络小说</div>
     <Card/>
+    <Footer/>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import IndexBanner from '@/components/banner/IndexBanner.vue';
 import Navigation from"@/components/navigation/Navigation.vue";
 import Card from "@/components/card/Card.vue";
 import CardVer from "@/components/card/CardVer.vue";
+import Footer from "@/components/footer/Footer.vue";
 
 export default {
   name: 'home',
@@ -24,7 +26,8 @@ export default {
     IndexBanner,
     Navigation,
     Card,
-    CardVer
+    CardVer,
+    Footer
   }
 }
 </script>
