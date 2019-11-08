@@ -1,0 +1,6 @@
+user表：
+	USERID 用户id
+	USERNAME 用户名
+	JOINDATE 注册时间
+	LOGOUT  销户时间
+	PASSWORD 用户密码

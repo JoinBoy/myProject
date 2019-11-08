@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      
+    <Header></Header>
     <IndexBanner/>
     <Navigation></Navigation>
     <Card/>
@@ -12,24 +12,33 @@
   </div>
 </template>
 
-<script>
+<script lang='ts'>
 // @ is an alias to /src
+import {Component,Vue} from 'vue-property-decorator';
 import IndexBanner from '@/components/banner/IndexBanner.vue';
 import Navigation from"@/components/navigation/Navigation.vue";
 import Card from "@/components/card/Card.vue";
 import CardVer from "@/components/card/CardVer.vue";
 import Footer from "@/components/footer/Footer.vue";
+import Header from "../components/header/Header.vue";
 
-export default {
-  name: 'home',
-  components: {
+@Component({
+  name:"home",
+  components:{
     IndexBanner,
     Navigation,
     Card,
     CardVer,
-    Footer
+    Footer,
+    Header
   }
+})
+
+export default class Home extends Vue{
+
 }
+
+
 </script>
 
 <style lang="scss">

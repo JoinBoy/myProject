@@ -1,12 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import ElementUI from 'element-ui';
-import  'element-ui/lib/theme-chalk/index.css';
+import router from './router/router'
+import store from './store/store'
 
-Vue.config.productionTip = false
-Vue.use(ElementUI);
+import VueResource from "vue-resource";
+import ElementUI from 'element-ui'
+import './styles.scss'
+import axios from 'axios';
+
+Vue.use(ElementUI)
+
+
+
+
+
+Vue.config.productionTip = false;
+Vue.use(VueResource);
+(Vue as any).http.options.withCredentials  = true;
+Vue.prototype.axios = axios;
 
 new Vue({
   router,

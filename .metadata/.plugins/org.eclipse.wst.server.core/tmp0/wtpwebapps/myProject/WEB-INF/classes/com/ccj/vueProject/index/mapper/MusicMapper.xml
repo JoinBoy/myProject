@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//rg//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccj.vueProject.music.dao.MusicMapper">
+    <insert id="addMusic"  parameterType="com.ccj.vueProject.music.bean.MusicBean" keyProperty="songerId">
+    	insert into
+    		music
+    		(
+    		 musicId,
+    		 songerName,
+    		 musicName,
+    		 musicUrl,
+    		 createTime,
+    		 updateTime)
+   		 VALUES(
+   		 		#{musicId:VARCHAR},
+   		 		#{songerName:VARCHAR},
+   		 		#{musicName:VARCHAR},
+   		 		#{musicUrl:VARCHAR},
+   		 		#{createTime:VARCHAR},
+   		 		#{updateTime:VARCHAR});
+    </insert>
+</mapper>

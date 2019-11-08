@@ -129,17 +129,28 @@ public class VueRegisterController {
 				SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String Ip = new GetIpAddr().getIpAddr(request);
 				int result = userService.addToken(sessionId, sdf2.format(date), userName ,Ip);
+				Cookie[] cookies = request.getCookies();
+				if(cookies != null && cookies.length > 0){
+				     for (Cookie cookie1 : cookies){
+				    	 log.info("1111"+cookie1.getName() + " " + cookie1.getValue());
+				     }
+				 }
 				if(result>0){
 					String lastUrl = (String) session.getAttribute("lastUrl");
 					session.removeAttribute("lastUrl");
 					session.setAttribute("IP", Ip);
 					Cookie cookie = new Cookie("userName",URLEncoder.encode(userName,"utf-8"));
+					cookie.setPath("./");
 					Cookie IpCookie = new Cookie("IP",Ip);
+					IpCookie.setPath("./");
 					/*设置cookie为7天*/
 					IpCookie.setMaxAge(3600*24*7);
 					cookie.setMaxAge(3600*24*7);
 					response.addCookie(cookie);
 					response.addCookie(IpCookie);
+					response.addHeader("P3P", "CP=CAO PSA OUR");
+					
+					
 					json.put("code", 0);
 					json.put("message", "登陆成功！");
 					log.info("用户登录成功！,用户名="+userName);
