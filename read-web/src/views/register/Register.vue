@@ -218,7 +218,7 @@
                             verification:this.verification}
             data = qs.stringify(data)
             axios({
-                    url:"http://192.168.1.201:8808/myProject/login",
+                    url:"http://192.168.1.119:8808/myProject/login",
                     method:"post",
                     withCredentials:true,
                     crossDomain:true,
@@ -246,9 +246,7 @@
         *获取验证码
         */
         getCode(){//获取验证码
-            this.$http.get("http://192.168.1.201                            verification:"4578"}
-            verification:"4578"}
-:8808/myProject/verificationCode").then((response:any)=>{
+            this.$http.get("http://192.168.1.119:8808/myProject/verificationCode").then((response:any)=>{
                 if(response.body.code==0){
                     this.creatCode(response.body.data);//调用生成验证码
                 }else{
