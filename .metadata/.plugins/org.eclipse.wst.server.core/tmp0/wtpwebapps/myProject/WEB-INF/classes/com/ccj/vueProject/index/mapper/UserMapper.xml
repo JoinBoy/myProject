@@ -6,6 +6,9 @@
 		<result column="MAIL" property='userMail' jdbcType="VARCHAR"/>
 		<result column="CREATETIME" property='createTime' jdbcType="VARCHAR"/>
 		<result column="PASSWORD" property='userPassWord' jdbcType="VARCHAR"/>
+		<result column="TOKEN" property='token' jdbcType="VARCHAR"/>
+		<result column="TOKENCREATTIME" property='tokenCreatTime' jdbcType="VARCHAR"/>
+		<result column="IP" property='ip' jdbcType="VARCHAR"/>
 	</resultMap>
 	<!--查找用户名是否存在  -->
 	<select id="findUser" resultMap="getUserName" parameterType="java.lang.String">
@@ -20,16 +23,25 @@
    			us.USERNAME = #{userName:VARCHAR}
 	</select>
 	<!-- 注册 -->
-	<insert id="addUser" keyProperty="USERID" parameterType="com.ccj.vueProject.user.bean.UserBean">
+	<insert id="addUser" keyProperty="id" parameterType="com.ccj.vueProject.user.bean.UserBean">
 		INSERT INTO user
-			(USERNAME,
+			(userId,
+			USERNAME,
 			MAIL,
 			PASSWORD,
-			CREATETIME)
-		VALUES(#{userName:VARCHAR},
+			CREATETIME,
+			TOKEN,
+			TOKENCREATTIME,
+			IP)
+		VALUES(
+		UUID(),
+		#{userName:VARCHAR},
 		#{userMail:VARCHAR},
 		#{userPassWord:VARCHAR},
-		#{createTime:VARCHAR});
+		#{createTime:VARCHAR}
+		#{token:VARCHAR},
+		#{tokenCreatTime:VARCHAR},
+		#{ip:VARCHAR});
 	</insert>
 	<!-- 插入验证码 -->
 	<insert id="addCode" keyProperty="CODEID" parameterType="com.ccj.vueProject.verificationCode.bean.VerificationCode">

@@ -1,0 +1,5 @@
+package com.ccj.filter;
+
+public class UserLoginedInterceptor {
+
+}

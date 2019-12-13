@@ -35,7 +35,7 @@
                     <input style="margin-left:3px" type="text" name="verification" id="verification" v-model.trim="verification"  class="formDiv-input"/>
                 </div>
                 <div class="formDiv">
-                    <button class="btn btn-success myBotton" @click='onLogin' :disabled="userName.length==0||userPassWord.length==0||verification.length==0">登录</button>
+                    <el-button class="myBotton" type="success" @click='onLogin' :disabled="userName.length==0||userPassWord.length==0||verification.length==0">登录</el-button>
                 </div>
             </div>
             <div  class="loginContent" v-cloak v-if="register" style="margin-top: 0px;">
@@ -62,7 +62,7 @@
                     <input type="text" name="password" id="mailRegister" v-model="mailRegister" value="mailRegister"  class="formDiv-input" />						
                 </div>
                 <div class="formDiv">
-                    <button class="btn btn-success myBotton" @click="submit" :disabled="messageRegister.length!=0||nameRegister.length==0||passWordRegister.length==0||passWordRegisterAffirm.length==0||mailRegister.length==0">注册</button>
+                    <el-button class="myBotton" type="success" @click="submit" :disabled="messageRegister.length!=0||nameRegister.length==0||passWordRegister.length==0||passWordRegisterAffirm.length==0||mailRegister.length==0">注册</el-button>
                 </div>
             </div>
         </div>
@@ -198,46 +198,18 @@
         *用户点击登录
         */
         private onLogin():void{
-            // this.$http.post("http://192.168.1.119:8808/myProject/login",{userName:this.userName,
-            // userPassWord:this.userPassWord,
-            // verification:this.verification},{emulateJSON:true,withCredentials:true}).then((response:any)=>{
-            //     if(response.body.code==0){
-            //         this.loginMessage = '';
-            //         if(response.body.message == '登陆成功！')
-            //         console.log("缓存",document.cookie)
-            //         console.log("登录成功")
-            //         // this.$router.push('/')
-            //     }else if(response.body.code==1){
-            //         this.loginMessage = response.body.message;
-            //     }
-            // },(response:any)=>{
-            //     this.loginMessage = "请求失败！";
-            // })
-            var data = {userName:this.userName,
-                         userPassWord:this.userPassWord,
-                            verification:this.verification}
-            data = qs.stringify(data)
-            axios({
-                    url:"http://192.168.1.119:8808/myProject/login",
-                    method:"post",
-                    withCredentials:true,
-                    crossDomain:true,
-                    emulateJSON:true,
-                    // headers: {
-                    //     'Content-Type': 'application/x-www-form-urlencoded'
-                    // },
-                    data:data 
-                }).then((response:any)=>{
-                    console.log(response)
-                // if(response.body.code==0){
-                //     this.loginMessage = '';
-                //     if(response.body.message == '登陆成功！')
-                //     console.log("缓存",document.cookie)
-                //     console.log("登录成功")
-                //     // this.$router.push('/')
-                // }else if(response.body.code==1){
-                //     this.loginMessage = response.body.message;
-                // }
+            this.$http.post("http://192.168.1.168:8808/myProject/login",{userName:this.userName,
+            userPassWord:this.userPassWord,
+            verification:this.verification},{emulateJSON:true,withCredentials:true}).then((response:any)=>{
+                if(response.body.code==0){
+                    this.loginMessage = '';
+                    if(response.body.message == '登陆成功！')
+                    console.log("缓存",document.cookie)
+                    console.log("登录成功")
+                    // this.$router.push('/')
+                }else if(response.body.code==1){
+                    this.loginMessage = response.body.message;
+                }
             },(response:any)=>{
                 this.loginMessage = "请求失败！";
             })
@@ -246,7 +218,7 @@
         *获取验证码
         */
         getCode(){//获取验证码
-            this.$http.get("http://192.168.1.119:8808/myProject/verificationCode").then((response:any)=>{
+            this.$http.get("http://192.168.1.168:8808/myProject/verificationCode").then((response:any)=>{
                 if(response.body.code==0){
                     this.creatCode(response.body.data);//调用生成验证码
                 }else{
@@ -430,7 +402,7 @@
 .myBotton{
 	font-size: 17px;
 	width:120px;
-	margin-left: 60px;
+    margin-top: 10px;
 }
 .warnning{
 	color:#fa2150;

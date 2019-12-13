@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueResource);
 (Vue as any).http.options.withCredentials  = true;
-Vue.prototype.axios = axios;
+// Vue.prototype.axios = axios;
 
 
 new Vue({

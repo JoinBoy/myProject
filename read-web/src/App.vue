@@ -44,7 +44,9 @@
   color: #2c3e50;
   min-width: 1200px;
 }
-
+*{
+  box-sizing: border-box;
+}
 #nav {
   padding: 30px;
 

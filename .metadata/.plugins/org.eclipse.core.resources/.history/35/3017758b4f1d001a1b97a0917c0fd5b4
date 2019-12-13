@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//rg//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccj.vueProject.user.dao.UserMapper" >
+	<resultMap type="com.ccj.vueProject.user.bean.UserBean" id="getUserName">
+		<result column="USERNAME" property="userName" jdbcType="VARCHAR"/>
+		<result column="MAIL" property='userMail' jdbcType="VARCHAR"/>
+		<result column="CREATETIME" property='createTime' jdbcType="VARCHAR"/>
+		<result column="PASSWORD" property='userPassWord' jdbcType="VARCHAR"/>
+		<result column="TOKEN" property='token' jdbcType="VARCHAR"/>
+		<result column="TOKENCREATTIME" property='tokenCreatTime' jdbcType="VARCHAR"/>
+		<result column="IP" property='ip' jdbcType="VARCHAR"/>
+	</resultMap>
+	<!--查找用户名是否存在  -->
+	<select id="findUser" resultMap="getUserName" parameterType="java.lang.String">
+		SELECT 
+    		us.USERNAME,
+    		us.MAIL,
+    		us.PASSWORD,
+    		us.CREATETIME
+   		FROM
+    		user as us
+   		WHERE
+   			us.USERNAME = #{userName:VARCHAR}
+	</select>
+	<!-- 注册 -->
+	<insert id="addUser" keyProperty="id" parameterType="com.ccj.vueProject.user.bean.UserBean">
+		INSERT INTO user
+			(userId,
+			USERNAME,
+			MAIL,
+			PASSWORD,
+			CREATETIME,
+			TOKEN,
+			TOKENCREATTIME,
+			IP)
+		VALUES(
+		UUID(),
+		#{userName:VARCHAR},
+		#{userMail:VARCHAR},
+		#{userPassWord:VARCHAR},
+		#{createTime:VARCHAR}
+		#{token:VARCHAR},
+		#{tokenCreatTime:VAECHAR},
+		#{ip:VARCHAR});
+	</insert>
+	<!-- 插入验证码 -->
+	<insert id="addCode" keyProperty="CODEID" parameterType="com.ccj.vueProject.verificationCode.bean.VerificationCode">
+		INSERT INTO verificationCode(
+			CODE,
+			CREATETIME,
+			SESSIONID,
+			FLAGE,
+			USERIP
+		)
+		VALUES(
+			#{code:VARCHAR},
+			#{createTime:VARCHAR},
+			#{sessionId:VARCHAR},
+			#{flage:VARCHAR},
+			#{userIp:VARCHAR}
+		);
+	
+	</insert>
+	<!-- 查询验证码 -->
+	<select id="findCode" resultType="com.ccj.vueProject.verificationCode.bean.VerificationCode" parameterType="java.lang.String">
+		SELECT
+			*
+		FROM
+			verificationcode
+		WHERE
+			CODE = #{0}
+		AND
+		<![CDATA[
+			TIMESTAMPDIFF(MINUTE ,verificationcode.CREATETIME,NOW()) < #{1}
+			]]>
+	</select>
+	<!-- 用户登录 -->
+	<select id="findUserLog" resultType="com.ccj.vueProject.user.bean.UserBean" parameterType="java.lang.String">
+		SELECT
+			*
+		FROM
+			user
+		WHERE
+			USERNAME = #{0:VARCHAR}
+		AND
+			PASSWORD = #{1:VARCHAR}
+	</select>
+	<!-- 存储token -->
+	<update id="addToken" parameterType="java.lang.String" >
+		UPDATE user SET TOKEN = #{0:VARCHAR},TOKENCREATTIME = #{1:VARCHAR},IP = #{3:VARCHAR} WHERE USERNAME = #{2:VARCHAR}
+	
+	</update>
+	<!-- 查看用户是否在登录有效期内 -->
+	<select id='findUserLogAgain' parameterType='java.lang.String' resultType= 'java.lang.String'>
+		SELECT userName FROM user WHERE userName = #{0:VARCHAR} AND IP = #{1:VARCHAR}
+	</select>
+	
+</mapper>
